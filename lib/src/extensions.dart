@@ -49,4 +49,25 @@ extension SizedContext on BuildContext {
   /// Returns fraction (0-1) of screen height in pixels
   double heightFraction(double fraction) => percentage * heightPx;
 
+  /// Returns percentage (1-100) of screen width in pixels
+  double widthPercent(double percentage) => percentage / 100 * widthPx;
+  
+  /// Returns percentage (1-100) of screen height in pixels
+  double heightPercent(double percentage) => percentage / 100 * heightPx;
+  
+  /// Ratio multiplier for text size (height / 100)
+  double get textSizeMultiplier => heightPx / 100.0;
+  
+  /// Ratio multiplier for image size (width / 100)
+  double get imageSizeMultiplier => widthPx / 100.0;
+  
 }
+  /// Returns the device ScreenType of Mobile, Tablet or Desktop
+  ScreenType get screenType {
+    double deviceWidth = isLandscape ? heightPx : widthPx;
+    if (deviceWidth > 950) return ScreenType.Desktop;
+    if (deviceWidth > 600) return ScreenType.Tablet;
+    return ScreenType.Mobile;
+  }
+}
+
